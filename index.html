@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم لافيندير | تجربة طعام استثنائية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8a4fff;
+            --secondary: #ff6b8b;
+            --accent: #2bd2ff;
+            --dark: #1a1a2e;
+            --light: #f8f9ff;
+            --gold: #ffd166;
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: var(--light);
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        /* تصميم الشريط العلوي */
+        .top-bar {
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: relative;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-left: 15px;
+            animation: spin 15s linear infinite;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            color: var(--accent);
+            transform: translateX(-5px);
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        /* شريط التنقل */
+        .navbar {
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--light);
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .nav-links li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), transparent);
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links li a:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(138, 79, 255, 0.4);
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(138, 79, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(255, 107, 139, 0.5);
+        }
+
+        .nav-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* قسم الهيرو */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(26,26,46,0.7) 0%, rgba(10,10,20,0.9) 70%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 900;
+        }
+
+        .hero-text p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            color: #e0e0ff;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .hero-btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+
+        .hero-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-7px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(138, 79, 255, 0.5);
+        }
+
+        .btn-primary:hover::before {
+            opacity: 1;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(138, 79, 255, 0.2);
+        }
+
+        .hero-image {
+            position: relative;
+            perspective: 1000px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero-img-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5);
+            border: 5px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .floating-plate {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(138, 79, 255, 0.5);
+            animation: float 4s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        .plate-1 {
+            top: -50px;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .plate-2 {
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 0.5s;
+        }
+
+        .floating-plate i {
+            font-size: 4rem;
+            color: white;
+        }
+
+        /* قسم المميزات */
+        .features {
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: var(--gold);
+            border-radius: 5px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-20px) rotateY(10deg) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(138, 79, 255, 0.4);
+            border-color: rgba(138, 79, 255, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .feature-card p {
+            color: #e0e0ff;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* قسم القائمة */
+        .menu-section {
+            padding: 120px 0;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .menu-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            transform-style: preserve-3d;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(138, 79, 255, 0.4);
+            border-color: rgba(138, 79, 255, 0.3);
+        }
+
+        .menu-img {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .menu-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .menu-item:hover .menu-img img {
+            transform: scale(1.1);
+        }
+
+        .menu-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .menu-content {
+            padding: 25px;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .menu-title {
+            font-size: 1.6rem;
+            color: var(--gold);
+        }
+
+        .menu-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .menu-desc {
+            color: #e0e0ff;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .menu-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-rating {
+            color: var(--gold);
+            font-size: 1.1rem;
+        }
+
+        .menu-btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(138, 79, 255, 0.4);
+        }
+
+        .menu-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 10px 20px rgba(43, 210, 255, 0.5);
+        }
+
+        /* قسم الحجز */
+        .reservation {
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reservation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        .reservation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .reservation-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            transform-style: preserve-3d;
+            animation: float 8s ease-in-out infinite;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .reservation-image img {
+            width: 100%;
+            display: block;
+            transition: transform 0.8s ease;
+        }
+
+        .reservation-image:hover img {
+            transform: scale(1.1);
+        }
+
+        .reservation-form {
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(138, 79, 255, 0.3);
+            transform-style: preserve-3d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reservation-form::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138,79,255,0.1) 0%, transparent 70%);
+            z-index: -1;
+            animation: rotate 20s linear infinite;
+        }
+
+        .reservation-form h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(138, 79, 255, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 20px rgba(138, 79, 255, 0.4);
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 139, 0.5);
+        }
+
+        /* الفوتر */
+        .footer {
+            background: rgba(5, 5, 15, 0.95);
+            backdrop-filter: blur(10px);
+            padding-top: 100px;
+            border-top: 1px solid rgba(138, 79, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            opacity: 0.05;
+            z-index: -1;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-col {
+            padding: 20px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+            color: var(--gold);
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: #e0e0ff;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .footer-links i {
+            color: var(--primary);
+        }
+
+        .footer-contact li {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-top: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-8px);
+        }
+
+        .social-links i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px 0 0 10px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .newsletter-btn {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 10px 10px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0a0c0;
+            font-size: 1.1rem;
+        }
+
+        /* الرسوميات المتحركة */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(138, 79, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(138, 79, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(138, 79, 255, 0); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* التصميم المتجاوب */
+        @media (max-width: 992px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .reservation-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .reservation-image {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .contact-info {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-text p {
+                font-size: 1.2rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .feature-card, .menu-item {
+                transform: none !important;
+            }
+            
+            .reservation-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الشريط العلوي -->
+    <div class="top-bar">
+        <div class="top-container">
+            <div class="logo">
+                <i class="fas fa-utensils logo-icon"></i>
+                <h1>مطعم لافيندير</h1>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+966 12 345 6789</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@lavender-restaurant.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-clock"></i>
+                    <span>يومياً: 4 مساءً - 12 منتصف الليل</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#about">عن المطعم</a></li>
+                <li><a href="#menu">قائمة الطعام</a></li>
+                <li><a href="#reservation">الحجوزات</a></li>
+                <li><a href="#contact">اتصل بنا</a></li>
+            </ul>
+        <a href="#reservation"><button class="nav-btn">احجز طاولتك</button></a>
+        </div>
+    </nav>
+
+    <!-- قسم الهيرو -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>تجربة طعام استثنائية لا تُنسى</h1>
+                <p>استمتع بأشهى المأكولات العالمية في أجواء ساحرة، مع مزيج فريد من النكهات الشرقية والعالمية التي أعدها أفضل الطهاة العالميين.</p>
+                <div class="hero-btns">
+                    <a href="#menu" class="hero-btn btn-primary">تصفح القائمة</a>
+                    <a href="#reservation" class="hero-btn btn-secondary">احجز الآن</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-img-container">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مطعم فاخر" class="hero-img">
+                </div>
+                <div class="floating-plate plate-1">
+                    <i class="fas fa-drumstick-bite"></i>
+                </div>
+                <div class="floating-plate plate-2">
+                    <i class="fas fa-wine-glass-alt"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المميزات -->
+    <section class="features" id="about">
+        <div class="section-title">
+            <h2>لماذا مطعم لافيندير؟</h2>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3>جودة استثنائية</h3>
+                <p>نستخدم أفضل المكونات الطازجة والمستوردة من مصادر موثوقة لضمان أعلى مستويات الجودة والنكهة.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-chef"></i>
+                </div>
+                <h3>طهاة عالميون</h3>
+                <p>فريقنا من الطهاة الحائزين على جوائز عالمية يبتكرون أطباقاً فريدة تخطف الأبصار والأذواق.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-wine-glass-alt"></i>
+                </div>
+                <h3>أجواء ساحرة</h3>
+                <p>تصميم داخلي فاخر مع إضاءة مدروسة وموسيقى هادئة تخلق تجربة عشاء لا تُنسى.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3>توصيل فاخر</h3>
+                <p>خدمة توصيل مميزة تحافظ على جودة الطعام ودرجة حرارته لتستمتع بتجربة المطعم في منزلك.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم القائمة -->
+    <section class="menu-section" id="menu">
+        <div class="section-title">
+            <h2>أشهى الأطباق</h2>
+        </div>
+        
+        <div class="menu-grid">
+            <div class="menu-item">
+                <div class="menu-img">
+                    <img src="image/Black Angus Steak.jpg" alt="وجبة">
+                    <div class="menu-badge">الأكثر مبيعاً</div>
+                </div>
+                <div class="menu-content">
+                    <div class="menu-header">
+                        <h3 class="menu-title">ستيك بلاك أنغوس</h3>
+                        <div class="menu-price">95 L.E</div>
+                    </div>
+                    <p class="menu-desc">لحم بلاك أنغوس مع صلصة الفطر والكمأ، يقدم مع بطاطس مشوية وخضار سوتيه.</p>
+                    <div class="menu-footer">
+                        <div class="menu-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <button class="menu-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-img">
+                    <img src="image/Salmon with white wine.jpg" alt="وجبة">
+                    <div class="menu-badge">جديد</div>
+                </div>
+                <div class="menu-content">
+                    <div class="menu-header">
+                        <h3 class="menu-title"> سلمون بالنبيذ الأبيض </h3>
+                        <div class="menu-price">85 L.E</div>
+                    </div>
+                    <p class="menu-desc">فيليه سلمون طازج مطهو بنبيذ أبيض مع أعشاب بروفانسية، يقدم مع أرز بسمتي.</p>
+                    <div class="menu-footer">
+                        <div class="menu-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <button class="menu-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-img">
+                    <img src="image/Mediterranean salad.jpg" alt="وجبة">
+                    <div class="menu-badge">صحي</div>
+                </div>
+                <div class="menu-content">
+                    <div class="menu-header">
+                        <h3 class="menu-title">سلطة البحر المتوسط</h3>
+                        <div class="menu-price">65 L.E</div>
+                    </div>
+                    <p class="menu-desc">مزيج من الخضار الطازجة والزيتون والجبنة الفيتا مع تتبيلة خاصة وزيت زيتون بكر.</p>
+                    <div class="menu-footer">
+                        <div class="menu-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="menu-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="menu-item">
+                <div class="menu-img">
+                    <img src="image/Black truffle pasta.jpg" alt="وجبة">
+                    <div class="menu-badge">عرض خاص</div>
+                </div>
+                <div class="menu-content">
+                    <div class="menu-header">
+                        <h3 class="menu-title">باستا التروفل الأسود</h3>
+                        <div class="menu-price">75 L.E</div>
+                    </div>
+                    <p class="menu-desc">باستا سوداء مع صلصة الكريمة والكمأ الأسود وجبنة البارميزان.</p>
+                    <div class="menu-footer">
+                        <div class="menu-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <button class="menu-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الحجز -->
+    <section class="reservation" id="reservation">
+        <div class="section-title">
+            <h2>احجز طاولتك</h2>
+        </div>
+        
+        <div class="reservation-container">
+            <div class="reservation-image">
+                <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="مطعم">
+            </div>
+            
+            <div class="reservation-form">
+                <h2>احجز تجربة مميزة</h2>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="الاسم الكامل" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="tel" class="form-control" placeholder="رقم الجوال" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="البريد الإلكتروني" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="date" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="time" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <select class="form-control" required>
+                            <option value="" disabled selected>عدد الأشخاص</option>
+                            <option value="1" style="color: black;">1 شخص</option>
+                            <option value="2" style="color: black;">2 أشخاص</option>
+                            <option value="3" style="color: black;">3 أشخاص</option>
+                            <option value="4" style="color: black;">4 أشخاص</option>
+                            <option value="5" style="color: black;">5 أشخاص</option>
+                            <option value="6" style="color: black;">6+ أشخاص</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">تأكيد الحجز</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="footer" id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>مطعم لافيندير</h3>
+                <p>وجهة عشاق الطعام الفاخر حيث تجتمع النكهات الراقية مع الأجواء الساحرة لتخلق تجربة طعام لا تُنسى.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/nedalessame.essame" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/nidal12essam12/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://x.com/nidal12essam12" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>روابط سريعة</h3>
+                <ul class="footer-links">
+                    <li><a href="#home"><i class="fas fa-chevron-left"></i> الرئيسية</a></li>
+                    <li><a href="#about"><i class="fas fa-chevron-left"></i> عن المطعم</a></li>
+                    <li><a href="#menu"><i class="fas fa-chevron-left"></i> قائمة الطعام</a></li>
+                    <li><a href="#reservation"><i class="fas fa-chevron-left"></i> الحجوزات</a></li>
+                    <li><a href="#contact"><i class="fas fa-chevron-left"></i> اتصل بنا</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>اتصل بنا</h3>
+                <ul class="footer-contact">
+                    <li>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span> ###################### </span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>+0123456789</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>info@lavender-restaurant.com</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-clock"></i>
+                        <span>الأحد - الخميس: 4 مساءً - 12 منتصف الليل</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>النشرة البريدية</h3>
+                <p>اشترك لتصلك أحدث العروض والفعاليات الخاصة بالمطعم</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="بريدك الإلكتروني" class="newsletter-input" required>
+                    <button type="submit" class="newsletter-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2025 مطعم لافيندير. جميع الحقوق محفوظة | تصميم وتطوير بواسطة NidalEssam</p>
+        </div>
+    </footer>
+
+    <script>
+        // تنشيط الرسوميات المتحركة عند التمرير
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.feature-card, .menu-item, .reservation-form');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0) rotate(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(element => {
+                element.style.opacity = 0;
+                element.style.transform = 'translateY(50px) rotate(5deg)';
+                element.style.transition = 'opacity 1s ease, transform 1s ease';
+                observer.observe(element);
+            });
+            
+            // تأثير التمرير السلس
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // تأثير العناصر العائمة
+            const floatingElements = document.querySelectorAll('.floating-plate, .logo');
+            floatingElements.forEach(el => {
+                el.addEventListener('mousemove', (e) => {
+                    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                    el.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                });
+                
+                el.addEventListener('mouseenter', () => {
+                    el.style.transition = 'none';
+                });
+                
+                el.addEventListener('mouseleave', () => {
+                    el.style.transition = 'transform 0.5s ease';
+                    el.style.transform = 'rotateY(0) rotateX(0)';
+                });
+            });
+            
+            // تأثير الزر المتحرك
+            const buttons = document.querySelectorAll('.hero-btn, .nav-btn, .menu-btn');
+            buttons.forEach(button => {
+                button.addEventListener('mousemove', e => {
+                    const x = e.offsetX;
+                    const y = e.offsetY;
+                    
+                    const btnWidth = button.clientWidth;
+                    const btnHeight = button.clientHeight;
+                    
+                    const transX = (x - btnWidth / 2) / 3;
+                    const transY = (y - btnHeight / 2) / 3;
+                    
+                    button.style.transform = `translate(${transX}px, ${transY}px)`;
+                });
+                
+                button.addEventListener('mouseout', () => {
+                    button.style.transform = '';
+                });
+            });
+            
+            // تأثير الصور عند التمرير
+            const images = document.querySelectorAll('.hero-img, .reservation-image img');
+            images.forEach(img => {
+                img.addEventListener('mousemove', (e) => {
+                    const rect = img.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateY = (x - centerX) / 25;
+                    const rotateX = (centerY - y) / 25;
+                    
+                    img.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                });
+                
+                img.addEventListener('mouseleave', () => {
+                    img.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
